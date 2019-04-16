@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>习题提交系统</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <!-- 分页组件开始 -->
+    <script src="../plugins/angularjs/pagination.js"></script>
+    <link rel="stylesheet" href="../plugins/angularjs/pagination.css">
+    <!-- 分页组件结束 -->
+
+
+    <script type="text/javascript" src="../js/base_pagination.js"></script>
+    <script type="text/javascript" src="../js/service/infoService.js"></script>
+    <script type="text/javascript" src="../js/service/uploadService.js"></script>
+    <script type="text/javascript" src="../js/controller/baseController.js"></script>
+    <script type="text/javascript" src="../js/controller/infoController.js"></script>
+
+    <script type="text/javascript">
+        var infoList = [{"role":"T1-计算机网络工程","child":[
+                { "id" : "张国栋", "name" : "T115V"},
+                { "id" : "邓文庆", "name" : "T101V"},
+                { "id" : "谷岳泽", "name" : "T102V"},
+                { "id" : "郭迈", "name" : "T103V"},
+                { "id" : "雷亚欣", "name" : "T104V"},
+                { "id" : "廖鹏", "name" : "T105V"},
+                { "id" : "刘煜强", "name" : "T106V"},
+                { "id" : "孟庆霞", "name" : "T107V"},
+                { "id" : "乔越", "name" : "T108V"},
+                { "id" : "孙灵芝", "name" : "T109V"},
+                { "id" : "覃思薇", "name" : "T110V"},
+                { "id" : "王乐梅", "name" : "T111V"},
+                { "id" : "王翔宇", "name" : "T112V"},
+                { "id" : "闫超", "name" : "T113V"},
+                { "id" : "杨凡昕", "name" : "T114V"},
+                { "id" : "韩均", "name" : "T115V"}
+
+            ]},
+            {"role":"T2-软件工程","child":[
+                    { "id" : "董乃士", "name" : "T204W"},
+                    { "id" : "常玉广", "name" : "T201W"},
+                    { "id" : "陈美静", "name" : "T202W"},
+                    { "id" : "陈瑞锋", "name" : "T203W"},
+                    { "id" : "杜倩男", "name" : "T205W"},
+                    { "id" : "冯浩东", "name" : "T206W"},
+                    { "id" : "宫海瑞", "name" : "T207W"},
+                    { "id" : "郭婉婉", "name" : "T208W"},
+                    { "id" : "郭子汇", "name" : "T208W"},
+                    { "id" : "胡茂强", "name" : "T210W"},
+                    { "id" : "金旭", "name" : "T211W"},
+                    { "id" : "李晨浩", "name" : "T212W"},
+                    { "id" : "李晓霞", "name" : "T213W"},
+                    { "id" : "刘沛泽", "name" : "T214W"},
+                    { "id" : "钱锦麟", "name" : "T215W"},
+                    { "id" : "孙晓梅", "name" : "T216W"},
+                    { "id" : "吴稳", "name" : "T217W"},
+                    { "id" : "肖林锋", "name" : "T218W"},
+                    { "id" : "杨汉宇", "name" : "T219W"},
+                    { "id" : "易平", "name" : "T220W"},
+                    { "id" : "张芙莹", "name" : "T221W"}
+                ]},
+            {"role":"T3-物联网","child":[
+                    { "id" : "冯滨", "name" : "T302X"},
+                    { "id" : "畅佳玉", "name" : "T301X"},
+
+                    { "id" : "冯妍妍", "name" : "T303X"},
+                    { "id" : "冯莹", "name" : "T304X"},
+                    { "id" : "黄丽萍", "name" : "T305X"},
+                    { "id" : "姜蕊", "name" : "T306X"},
+                    { "id" : "李浩东", "name" : "T307X"},
+                    { "id" : "李莹", "name" : "T308X"},
+                    { "id" : "李卓航", "name" : "T308X"},
+                    { "id" : "刘欣炟", "name" : "T310X"},
+                    { "id" : "罗晓霞", "name" : "T311X"},
+                    { "id" : "缪滋怡", "name" : "T312X"},
+                    { "id" : "任敬", "name" : "T313X"},
+                    { "id" : "邵晓敏", "name" : "T314X"},
+                    { "id" : "薛志彪", "name" : "T315X"},
+                    { "id" : "杨泽", "name" : "T316X"},
+                    { "id" : "张名师", "name" : "T317X"},
+                    { "id" : "张秀平", "name" : "T318X"},
+                    { "id" : "张哲", "name" : "T319X"},
+                    { "id" : "赵勇", "name" : "T320X"},
+                    { "id" : "郑盼盼", "name" : "T321X"},
+                    { "id" : "周圣杰", "name" : "T322X"}
+                ]},
+            {"role":"T4-晋城软工","child":[
+                    { "id" : "张晨彬", "name" : "C11T4Y"},
+                    { "id" : "安晓洁", "name" : "A41T4Y"},
+                    { "id" : "成学博", "name" : "A45T4Y"},
+                    { "id" : "丁柯语", "name" : "A31T4Y"},
+                    { "id" : "郭力源", "name" : "A15T4Y"},
+                    { "id" : "郝敏贵", "name" : "A43T4Y"},
+                    { "id" : "牛旭东", "name" : "B61T4Y"},
+                    { "id" : "李金凤", "name" : "A12T4Y"},
+                    { "id" : "李源", "name" : "B62T4Y"},
+                    { "id" : "李远博", "name" : "A14T4Y"},
+                    { "id" : "李英", "name" : "B64T4Y"},
+                    { "id" : "李雅琦", "name" : "A42T4Y"},
+                    { "id" : "武崇", "name" : "A13T4Y"},
+                    { "id" : "卫洁芬", "name" : "A11T4Y"},
+                    { "id" : "吴建豪", "name" : "B42T4Y"},
+                    { "id" : "闫青", "name" : "B63T4Y"},
+                    { "id" : "银帅", "name" : "A21T4Y"},
+
+                    { "id" : "张佳宇", "name" : "A22T4Y"},
+                    { "id" : "张强", "name" : "A23T4Y"},
+                    { "id" : "张升", "name" : "B41T4Y"},
+                    { "id" : "左媛", "name" : "A44T4Y"}
+                ]},
+            {"role":"T5-晋城数媒","child":[
+                    { "id" : "尚舒鹏", "name" : "T509Z"},
+                    { "id" : "陈超", "name" : "T501Z"},
+                    { "id" : "韩金祥", "name" : "T502Z"},
+                    { "id" : "菅春森", "name" : "T503Z"},
+                    { "id" : "兰旭丽", "name" : "T504Z"},
+                    { "id" : "李成章", "name" : "T505Z"},
+                    { "id" : "李庆庆", "name" : "T506Z"},
+                    { "id" : "聂少杰", "name" : "T507Z"},
+                    { "id" : "任新宇", "name" : "T508Z"},
+
+                    { "id" : "宋超", "name" : "T510Z"},
+                    { "id" : "王勇", "name" : "T511Z"},
+                    { "id" : "杨盛", "name" : "T512Z"}
+
+                ]},
+            {"role":"T6+","child":[
+                    { "id" : "王子安", "name" : "T6Z01"},
+                    { "id" : "李英", "name" : "T6J02"},
+                    { "id" : "张祺", "name" : "T6Z03"},
+                    { "id" : "冯金平", "name" : "T6J04"},
+                    { "id" : "林伊甸", "name" : "T6Z05"},
+                    { "id" : "王磊", "name" : "T6Z06"},
+                    { "id" : "王辉", "name" : "T6J07"},
+                    { "id" : "夏科垒", "name" : "T6Z08"},
+                    { "id" : "韩均", "name" : "T6Z09"},
+                    { "id" : "闫建烨", "name" : "T6J10"},
+                    { "id" : "余天武", "name" : "T6Z11"},
+                    { "id" : "张亚波", "name" : "T6Z12"},
+                    { "id" : "郜鹏宇", "name" : "T6Z13"},
+                    { "id" : "李哲", "name" : "T6J14"},
+                    { "id" : "刘健知", "name" : "T6Z15"},
+                    { "id" : "李岳峰", "name" : "T6Z16"},
+                    { "id" : "戚建猛", "name" : "T6J17"},
+                    { "id" : "李国军", "name" : "T6J18"},
+                    { "id" : "洪经纬", "name" : "T6Z19"}
+
+                ]}
+
+
+        ];
+    </script>
+
+
+</head>
+<body class="hold-transition skin-red sidebar-mini" ng-app="axbt" ng-controller="infoController" style="background:#f5f5f5;font-size: 12px;">
+<div class="container-fluid">
+    <div class="row" style="background: #0082df;color: #ffffff;">
+        <div class=""  style="padding-left:30px;font-size: 22px;width: 480px;float:left;height:78px;line-height:78px;">天梯赛习题提交系统</div>
+        <div class="text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;cursor:pointer;width: 120px;float:left;height:78px;line-height:78px;" onclick="location.href='/index.html'">首页</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" data-toggle="modal"
+             data-target="#editModal" ng-click="entity={};image_entity={};select1={};select2={}">提交截图</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/admin/dayscore.html'">小组排行榜</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/每日题目练习表.html'">习题提交表</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/admin/zulogin.html'">组长登录</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/admin/guanlogin.html'">管理登录</div>
+
+    </div>
+</div>
+
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+
+        <!--工具栏-->
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+
+                    <button type="button" class="btn btn-facebook" title="删除" style="font-size: 12px;" ng-click="dele()"><i
+                            class="fa fa-trash-o"></i> 删除
+                    </button>
+                    <button type="button" class="btn btn-default" title="刷新" style="font-size: 12px;" onclick="window.location.reload();"><i
+                            class="fa fa-refresh"></i> 刷新
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="box-tools pull-right">
+            <div class="has-feedback">
+                组别：<select  ng-model="select1" ng-options="item.role for item in infoList1"
+                        ng-change="guaninfo1(select1)">
+                    <option value="">--请选择--</option>
+                </select>
+                姓名：<select  ng-model="select2" ng-options="item.id for item in infoList"
+                         ng-change="guaninfo2(select2)"  >
+                    <option value="">--请选择--</option>
+                </select>
+
+                日期：<input type="date" ng-model="searchEntity.date">
+
+                <input type="button" class="btn btn-primary" value="查询" style="font-size: 12px;" ng-click="reloadList()">
+            </div>
+        </div>
+        <!--工具栏/-->
+
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+                <th class="" style="padding-right:0px">
+                    <input id="selall" type="checkbox" class="icheckbox_square-blue">
+                </th>
+                <th class="sorting">序号</th>
+                <th class="sorting">编号</th>
+                <th class="sorting">姓名</th>
+                <th class="sorting">1题得分</th>
+                <th class="sorting">2题得分</th>
+                <th class="sorting">3题得分</th>
+                <th class="sorting">截图</th>
+                <th class="sorting">提交时间</th>
+
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="entity in list">
+                <td><input type="checkbox" ng-click="updateSelection($event,entity.id)"></td>
+                <td>{{entity.id}}</td>
+                <td>{{entity.num}}</td>
+                <td>{{entity.name}}</td>
+                <td>{{entity.l01}}</td>
+                <td>{{entity.l02}}</td>
+                <td>{{entity.l03}}</td>
+                <td><img  src="/uploaded/{{entity.imgurl}}" width="400px" height="100px"></td>
+                <td>{{entity.date |date:'yyyy-MM-dd'}}</td>
+
+                <td class="text-center">
+                    <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal"
+                            ng-click="findOne(entity.id)">修改
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--数据列表/-->
+    </div>
+    <!-- 数据表格 /-->
+    <!-- 分页 -->
+    <tm-pagination conf="paginationConf"></tm-pagination>
+</div>
+<!-- /.box-body -->
+
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">习题提交&emsp;</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" width="800px">
+                    <tr>
+
+                        <td>组别</td>
+
+                        <td>
+                            <select class="form-control" ng-model="select1" ng-options="item.role for item in infoList1"
+                                    ng-change="changeList1(select1)">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>姓名</td>
+
+                        <td>
+                            <select class="form-control" ng-model="select2" ng-options="item.id for item in infoList"
+                            ng-change="changeList(select2)">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>编号</td>
+
+                        <td><input class="form-control" ng-model="entity.num" placeholder="编号" readonly="readonly"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>1题得分</td>
+
+                        <td><input class="form-control" ng-model="entity.l01" placeholder="1题得分" oninput="value=value.replace(/[^\d]/g,'');if(value<0)value=0;if(value>30)value=30" ></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>2题得分</td>
+
+                        <td><input class="form-control" ng-model="entity.l02" placeholder="2题得分" oninput="value=value.replace(/[^\d]/g,'');if(value<0)value=0;if(value>30)value=30"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>3题得分</td>
+
+                        <td><input class="form-control" ng-model="entity.l03" placeholder="3题得分" oninput="value=value.replace(/[^\d]/g,'');if(value<0)value=0;if(value>30)value=30"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>上传截图</td>
+
+
+                        <td>
+                            <input type="file" id="file"/>
+                            <button class="btn btn-primary" type="button" ng-click="uploadFile()">
+                                上传
+                            </button>
+                            <img  src="/uploaded/{{image_entity}}" width="300px" height="100px">
+                            <!--<input class="form-control" ng-model="entity.imgurl" placeholder="图片路径">-->
+
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>创建时间</td>
+
+                        <td><input class="form-control" ng-model="entity.date" placeholder="创建时间" type="date"></td>
+
+                    </tr>
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="background: #0082df">
+    <div class="row">
+        <div class="col-md-12 text-center" style="color: #cccccc;">
+            <span style="font-size: 10px;">版权所有@一点博客&emsp;3375793023@qq.com</span><br>
+
+            <img src="../brand.jpg" style="width: 80px;height: 80px;"><br>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

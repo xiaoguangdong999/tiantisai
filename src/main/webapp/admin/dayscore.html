@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>每日均分排行榜</title>
+    <link rel="stylesheet" href="../plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../plugins/angularjs/angular.min.js"></script>
+    <script type="text/javascript">
+        var app=angular.module('axbt',[]);
+        app.controller('groupController' ,function($scope,$http){
+            $scope.findInfo = function () {
+                $http.get('/info/searchGroupAve').success(
+                    function (response) {
+                        $scope.entity = response;
+
+                    }
+                )
+            }
+        });
+    </script>
+</head>
+
+<body class="hold-transition skin-red sidebar-mini" ng-app="axbt" ng-controller="groupController" ng-init="findInfo()" style="background:#f5f5f5;font-size: 12px;">
+<div class="container-fluid">
+    <div class="row" style="background: #0082df;color: #ffffff;">
+        <div class=""  style="padding-left:30px;font-size: 22px;width: 480px;float:left;height:78px;line-height:78px;">天梯赛习题提交系统</div>
+        <div class="text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;cursor:pointer;width: 120px;float:left;height:78px;line-height:78px;" onclick="location.href='/index.html'">首页</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" data-toggle="modal"
+             data-target="#editModal" ng-click="entity={};image_entity={};select1={};select2={}">提交截图</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/admin/dayscore.html'">小组排行榜</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/每日题目练习表.html'">习题提交表</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/admin/zulogin.html'">组长登录</div>
+        <div class="col-md-1 col-sm-12 text-center" onmouseover="this.style.background='#006fd8'" onmouseout="this.style.background='#0082df'" style="font-size: 16px;width: 120px;float:left;cursor:pointer;height:78px;line-height:78px;" onclick="location.href='/admin/guanlogin.html'">管理登录</div>
+
+    </div>
+</div>
+<div class="box-body">
+
+    <!-- 数据表格 -->
+    <div class="table-box">
+
+        <!--工具栏-->
+        <div class="pull-left">
+            <div class="form-group form-inline">
+                <div class="btn-group">
+
+                </div>
+            </div>
+        </div>
+        <div class="box-tools pull-right">
+            <div class="has-feedback">
+
+            </div>
+        </div>
+        <!--工具栏/-->
+
+        <!--数据列表-->
+        <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+            <thead>
+            <tr>
+
+                <th class="sorting">T1-计算机网络工程</th>
+                <th class="sorting">T2-软件工程</th>
+                <th class="sorting">T3-物联网</th>
+                <th class="sorting">T4-晋城软工</th>
+                <th class="sorting">T5-晋城数媒</th>
+                <th class="sorting">最高分</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <!--<td><input type="checkbox" ng-click="updateSelection($event,entity.id)"></td>-->
+                <td ng-if="entity.ave[0]!=entity.high">{{entity.ave[0]}}</td>
+                <td ng-if="entity.ave[0]==entity.high" style="color: red">{{entity.ave[0]}}</td>
+                <td ng-if="entity.ave[1]!=entity.high">{{entity.ave[1]}}</td>
+                <td ng-if="entity.ave[1]==entity.high" style="color: red">{{entity.ave[1]}}</td>
+                <td ng-if="entity.ave[2]!=entity.high">{{entity.ave[2]}}</td>
+                <td ng-if="entity.ave[2]==entity.high" style="color: red">{{entity.ave[2]}}</td>
+                <td ng-if="entity.ave[3]!=entity.high">{{entity.ave[3]}}</td>
+                <td ng-if="entity.ave[3]==entity.high" style="color: red">{{entity.ave[3]}}</td>
+                <td ng-if="entity.ave[4]!=entity.high">{{entity.ave[4]}}</td>
+                <td ng-if="entity.ave[4]==entity.high" style="color: red">{{entity.ave[4]}}</td>
+
+                <td ng-if="entity.ave[0]==entity.high&&entity.high!=0" style="color: red">T1-计算机网络工程</td>
+                <td ng-if="entity.ave[1]==entity.high&&entity.high!=0" style="color: red">T2-软件工程</td>
+                <td ng-if="entity.ave[2]==entity.high&&entity.high!=0" style="color: red">T3-物联网</td>
+                <td ng-if="entity.ave[3]==entity.high&&entity.high!=0" style="color: red">T4-晋城软工</td>
+                <td ng-if="entity.ave[4]==entity.high&&entity.high!=0" style="color: red">T5-晋城数媒</td>
+                <td ng-if="entity.high==0" style="color: red">暂无</td>
+            </tr>
+
+            </tbody>
+        </table>
+        <!--数据列表/-->
+    </div>
+
+    <!-- 数据表格 /-->
+    <!-- 分页 -->
+    <tm-pagination conf="paginationConf"></tm-pagination>
+</div>
+<!-- /.box-body -->
+
+<!-- 编辑窗口 -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">习题提交&emsp;<span style="font-size: 12px;color: red;">注：提交后不可修改，请核准信息。</span></h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-striped" width="800px">
+                    <tr>
+
+                        <td>组别</td>
+
+                        <td>
+                            <select class="form-control" ng-model="select1" ng-options="item.role for item in infoList1"
+                                    ng-change="changeList1(select1)">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>姓名</td>
+
+                        <td>
+                            <select class="form-control" ng-model="select2" ng-options="item.id for item in infoList"
+                                    ng-change="changeList(select2)">
+                                <option value="">--请选择--</option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+
+                        <td>编号</td>
+
+                        <td><input class="form-control" ng-model="entity.num" placeholder="编号" readonly="readonly"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>1题得分</td>
+
+                        <td><input class="form-control" ng-model="entity.l01" placeholder="1题得分" oninput="value=value.replace(/[^\d]/g,'');if(value<0)value=0;if(value>30)value=30" ></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>2题得分</td>
+
+                        <td><input class="form-control" ng-model="entity.l02" placeholder="2题得分" oninput="value=value.replace(/[^\d]/g,'');if(value<0)value=0;if(value>30)value=30"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>3题得分</td>
+
+                        <td><input class="form-control" ng-model="entity.l03" placeholder="3题得分" oninput="value=value.replace(/[^\d]/g,'');if(value<0)value=0;if(value>30)value=30"></td>
+
+                    </tr>
+                    <tr>
+
+                        <td>上传截图</td>
+
+
+                        <td>
+                            <input type="file" id="file"/>
+                            <button class="btn btn-primary" type="button" ng-click="uploadFile()">
+                                上传
+                            </button>
+                            <img  src="/uploaded/{{image_entity}}" width="300px" height="100px">
+                            <!--<input class="form-control" ng-model="entity.imgurl" placeholder="图片路径">-->
+
+                        </td>
+
+                    </tr>
+                    <!--<tr>
+
+                        <td>创建时间</td>
+
+                        <td><input class="form-control" ng-model="entity.date" placeholder="创建时间"></td>
+
+                    </tr>-->
+
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+                <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" >
+    <div class="row">
+        <div class="col-md-12 text-center" style="background: #ffffff;color: #cccccc;position: absolute;bottom: 0px;">
+            <span style="font-size: 10px;">版权所有@一点博客&emsp;3375793023@qq.com</span><br>
+            <img src="../brand.jpg" style="width: 80px;height: 80px;"><br>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

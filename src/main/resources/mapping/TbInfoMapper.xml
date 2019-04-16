@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.axbt.keshe.dao.TbInfoMapper">
+  <resultMap id="BaseResultMap" type="top.axbt.keshe.domain.TbInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="num" jdbcType="VARCHAR" property="num" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="l01" jdbcType="INTEGER" property="l01" />
+    <result column="l02" jdbcType="INTEGER" property="l02" />
+    <result column="l03" jdbcType="INTEGER" property="l03" />
+    <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, num, name, l01, l02, l03, imgurl, date
+  </sql>
+  <select id="selectByExample" parameterType="top.axbt.keshe.domain.TbInfoExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="top.axbt.keshe.domain.TbInfoExample">
+    delete from info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="top.axbt.keshe.domain.TbInfo">
+    insert into info (id, num, name, 
+      l01, l02, l03, imgurl, 
+      date)
+    values (#{id,jdbcType=INTEGER}, #{num,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{l01,jdbcType=INTEGER}, #{l02,jdbcType=INTEGER}, #{l03,jdbcType=INTEGER}, #{imgurl,jdbcType=VARCHAR}, 
+      #{date,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="top.axbt.keshe.domain.TbInfo">
+    insert into info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="l01 != null">
+        l01,
+      </if>
+      <if test="l02 != null">
+        l02,
+      </if>
+      <if test="l03 != null">
+        l03,
+      </if>
+      <if test="imgurl != null">
+        imgurl,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="l01 != null">
+        #{l01,jdbcType=INTEGER},
+      </if>
+      <if test="l02 != null">
+        #{l02,jdbcType=INTEGER},
+      </if>
+      <if test="l03 != null">
+        #{l03,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="top.axbt.keshe.domain.TbInfoExample" resultType="java.lang.Long">
+    select count(*) from info
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update info
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.num != null">
+        num = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.l01 != null">
+        l01 = #{record.l01,jdbcType=INTEGER},
+      </if>
+      <if test="record.l02 != null">
+        l02 = #{record.l02,jdbcType=INTEGER},
+      </if>
+      <if test="record.l03 != null">
+        l03 = #{record.l03,jdbcType=INTEGER},
+      </if>
+      <if test="record.imgurl != null">
+        imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.date != null">
+        date = #{record.date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update info
+    set id = #{record.id,jdbcType=INTEGER},
+      num = #{record.num,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      l01 = #{record.l01,jdbcType=INTEGER},
+      l02 = #{record.l02,jdbcType=INTEGER},
+      l03 = #{record.l03,jdbcType=INTEGER},
+      imgurl = #{record.imgurl,jdbcType=VARCHAR},
+      date = #{record.date,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="top.axbt.keshe.domain.TbInfo">
+    update info
+    <set>
+      <if test="num != null">
+        num = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="l01 != null">
+        l01 = #{l01,jdbcType=INTEGER},
+      </if>
+      <if test="l02 != null">
+        l02 = #{l02,jdbcType=INTEGER},
+      </if>
+      <if test="l03 != null">
+        l03 = #{l03,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null">
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="top.axbt.keshe.domain.TbInfo">
+    update info
+    set num = #{num,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      l01 = #{l01,jdbcType=INTEGER},
+      l02 = #{l02,jdbcType=INTEGER},
+      l03 = #{l03,jdbcType=INTEGER},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      date = #{date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
