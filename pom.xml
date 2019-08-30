@@ -12,7 +12,7 @@
     <artifactId>keshe</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
-    <name>keshe</name>
+    <name>PTA_OA_SUS</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
